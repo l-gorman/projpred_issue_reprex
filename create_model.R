@@ -9,6 +9,10 @@ options(mc.cores = 4, brms.backend = "cmdstanr") # allows threading
 
 indicator_data <- readr::read_csv("./data/example_dataset.csv")
 
+set.seed(123)
+
+indicator_data <- indicator_data[sample(c(1:nrow(indicator_data)),400),]
+
 ref_model <- brm(
   formula=bf(log_tva ~ 1 +
                

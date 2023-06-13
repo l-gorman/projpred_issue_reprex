@@ -65,7 +65,7 @@ search_terms <- get_search_terms(group_effects,auxilliary_variables)
 cv_varsel_res <- cv_varsel(ref_model,
                           method = 'forward', 
                           cv_method = 'kfold', 
-                          K = 5,
+                          K = 2,
                           verbose = TRUE, 
                           seed = 1,
                           search_terms=search_terms)

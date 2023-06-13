@@ -4,6 +4,9 @@ library(brms)
 library(projpred)
 library(cmdstanr)
 
+options(mc.cores = 4,  brms.backend = "cmdstanr")
+
+
 loadRData <- function(fileName){
   #loads an RData file, and returns it
   load(fileName)
@@ -59,4 +62,13 @@ auxilliary_variables <- c(
 group_effects <-"(1 | iso_country_code) + (1 | iso_country_code:village)"
 search_terms <- get_search_terms(group_effects,auxilliary_variables) 
 
+cv_varsel_res <- cv_varsel(ref_model,
+                          method = 'forward', 
+                          cv_method = 'kfold', 
+                          K = 5,
+                          verbose = TRUE, 
+                          seed = 1,
+                          search_terms=search_terms)
+
+save(cv_varsel_res,file="./outputs/cv_varsel_res.rda")
 

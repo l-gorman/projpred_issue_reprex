@@ -1016,6 +1016,16 @@
       "Hash": "df58958f293b166e4ab885ebcad90e02",
       "Requirements": []
     },
+    "optimx": {
+      "Package": "optimx",
+      "Version": "2022-4.30",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "deee0d9b5a41a4a356974254f5fe828a",
+      "Requirements": [
+        "numDeriv"
+      ]
+    },
     "ordinal": {
       "Package": "ordinal",
       "Version": "2022.11-16",

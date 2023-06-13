@@ -8,3 +8,13 @@ Relating to an analysis discussed [here](https://discourse.mc-stan.org/t/projpre
 I have included a sample dataset in `data/example_dataset.csv`. The reference model is created
 in the `create_model.R` file. Projpred  can be run on the model using the `run_projpred.R` script (although
 takes a while to run!). This mimics the HPC run. 
+
+# Notes
+
+Error:
+
+```
+Failed with error:  ‘there is no package called ‘optimx’’
+Error in getOptfun(optimizer) : 
+  'optimx' package must be installed order to use 'optimizer="optimx"'
+```

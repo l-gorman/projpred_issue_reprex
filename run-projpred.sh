@@ -1,6 +1,6 @@
 #!/bin/bash
  
-#SBATCH --job-name=overall_models
+#SBATCH --job-name=projpred_reprex
 #SBATCH -o ./Report/projpred.out
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1

@@ -1,8 +1,10 @@
+# sbatch run-projpred.sh
 library(readr)
 
 library(brms)
 library(projpred)
 library(cmdstanr)
+library(optimx)
 
 options(mc.cores = 4,  brms.backend = "cmdstanr")
 

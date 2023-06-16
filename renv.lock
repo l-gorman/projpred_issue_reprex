@@ -53,10 +53,10 @@
     },
     "Matrix": {
       "Package": "Matrix",
-      "Version": "1.4-1",
+      "Version": "1.5-4.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "699c47c606293bdfbc9fd78a93c9c8fe",
+      "Hash": "38082d362d317745fb932e13956dccbb",
       "Requirements": [
         "lattice"
       ]
@@ -368,10 +368,10 @@
     },
     "commonmark": {
       "Package": "commonmark",
-      "Version": "1.8.0",
+      "Version": "1.9.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "2ba81b120c1655ab696c935ef33ea716",
+      "Hash": "d691c61bff84bd63c383874d2d0c3307",
       "Requirements": []
     },
     "cpp11": {
@@ -584,6 +584,14 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "15e9634c0fcd294799e9b2e929ed1b86",
+      "Requirements": []
+    },
+    "getopt": {
+      "Package": "getopt",
+      "Version": "1.20.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "ad68e3263f0bc9269aab8c2039440117",
       "Requirements": []
     },
     "ggplot2": {
@@ -1026,6 +1034,16 @@
         "numDeriv"
       ]
     },
+    "optparse": {
+      "Package": "optparse",
+      "Version": "1.7.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "aa4a7717b5760a769c7fd3d34614f2a2",
+      "Requirements": [
+        "getopt"
+      ]
+    },
     "ordinal": {
       "Package": "ordinal",
       "Version": "2022.11-16",
@@ -1176,10 +1194,15 @@
     },
     "projpred": {
       "Package": "projpred",
-      "Version": "2.6.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "7f7f8f64e4f40da5ff5ab951f6afd374",
+      "Version": "2.6.0.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "projpred",
+      "RemoteUsername": "l-gorman",
+      "RemoteRef": "simplify-2-array-bugfix",
+      "RemoteSha": "812e3dd8e9b702d602ba807abde3e86d3706fa1e",
+      "Hash": "154cba8e8852ce1bbbb5788788327b2e",
       "Requirements": [
         "MASS",
         "Rcpp",
@@ -1187,6 +1210,7 @@
         "abind",
         "gamm4",
         "ggplot2",
+        "gtools",
         "lme4",
         "loo",
         "mclogit",
@@ -1481,16 +1505,15 @@
     },
     "testthat": {
       "Package": "testthat",
-      "Version": "3.1.4",
+      "Version": "3.1.9",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "f76c2a02d0fdc24aa7a47ea34261a6e3",
+      "Hash": "bcc48d6c50770b435c655954e45672c1",
       "Requirements": [
         "R6",
         "brio",
         "callr",
         "cli",
-        "crayon",
         "desc",
         "digest",
         "ellipsis",
@@ -1622,10 +1645,10 @@
     },
     "waldo": {
       "Package": "waldo",
-      "Version": "0.4.0",
+      "Version": "0.5.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "035fba89d0c86e2113120f93301b98ad",
+      "Hash": "2c993415154cdb94649d99ae138ff5e5",
       "Requirements": [
         "cli",
         "diffobj",

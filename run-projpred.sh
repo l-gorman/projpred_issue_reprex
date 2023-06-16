@@ -1,7 +1,7 @@
 #!/bin/bash
  
 #SBATCH --job-name=projpred_reprex
-#SBATCH -o ./Report/projpred.out
+#SBATCH -o ./Report/projpred.%a.out
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=4

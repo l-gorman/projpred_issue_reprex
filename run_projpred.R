@@ -5,8 +5,21 @@ library(brms)
 library(projpred)
 library(cmdstanr)
 library(optimx)
+library(optparse)
 
 options(mc.cores = 4,  brms.backend = "cmdstanr")
+
+
+option_list = list(
+  make_option(c("-j", "--index"), type='character',
+              help="Index for project to model")
+)
+
+opt_parser = OptionParser(option_list=option_list);
+opt = parse_args(opt_parser);
+
+opt$index <- as.numeric(opt$index)
+
 
 
 loadRData <- function(fileName){
@@ -64,10 +77,9 @@ auxilliary_variables <- c(
   'norm_gdl_country_shdi'
 )
 
-
-
 group_effects <-"(1 | iso_country_code) + (1 | iso_country_code:village)"
-# fixed_effects <- paste0(group_effects, " + ", fixed_effects)
+
+if (opt$index==1){
 
 # Basing this off of discussion on stan forum:
 # https://discourse.mc-stan.org/t/projpred-fixing-group-effects-in-search-terms-and-tips-for-speed/31678/4
@@ -84,8 +96,10 @@ cv_varsel_res <- cv_varsel(ref_model,
                           search_terms=search_terms,
                           nterms_max=12)
 save(cv_varsel_res,file="./outputs/cv_varsel_res_test_1.rda")
+}
 
 
+if (opt$index==2){
 search_terms <- get_search_terms(group_effects,auxilliary_variables, max_terms=16) 
 
 cv_varsel_res <- cv_varsel(ref_model,
@@ -98,4 +112,4 @@ cv_varsel_res <- cv_varsel(ref_model,
                            nterms_max=12)
 
 save(cv_varsel_res,file="./outputs/cv_varsel_res_test_2.rda")
-
+}

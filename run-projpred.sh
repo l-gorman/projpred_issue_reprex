@@ -8,6 +8,7 @@
 #SBATCH --time=1-00:00:00
 #SBATCH --mem=8G
 #SBATCH --account=sscm012844
+#SBATCH --array=1-2
 
 
 cd "${SLURM_SUBMIT_DIR}"
@@ -25,6 +26,6 @@ echo "More details on submitting jobs here https://www.acrc.bris.ac.uk/protected
 
 module add languages/r/4.1.0
 
-Rscript "./run_projpred.R"
+Rscript "./run_projpred.R" -j ${SLURM_ARRAY_TASK_ID}
 
 

@@ -4,3 +4,4 @@ data/modelling_df.csv
 *.DS_Store
 *.Rproj
 Report/
+.Rproj.user

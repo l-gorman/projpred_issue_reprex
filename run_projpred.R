@@ -19,8 +19,13 @@ loadRData <- function(fileName){
 ref_model <- loadRData("./outputs/ref_model.rda")
 ref_model <- get_refmodel(ref_model)
 
-get_search_terms <- function(fixed_terms, other_predictors) {
-  search_terms <- unlist(lapply(1:length(other_predictors), function(m_predictors) {
+get_search_terms <- function(fixed_terms, other_predictors, max_terms) {
+  
+  if (max_terms > length(other_predictors)){
+    stop("Cannot have max terms more than predictors")
+  }
+  
+  search_terms <- unlist(lapply(1:max_terms, function(m_predictors) {
     lapply(combn(other_predictors, m = m_predictors, simplify = FALSE),
            function(idxs_predictors) {
              paste0(idxs_predictors, collapse = " + ")
@@ -62,15 +67,24 @@ auxilliary_variables <- c(
 
 
 group_effects <-"(1 | iso_country_code) + (1 | iso_country_code:village)"
-search_terms <- get_search_terms(group_effects,auxilliary_variables) 
+# fixed_effects <- paste0(group_effects, " + ", fixed_effects)
 
-cv_varsel_res <- cv_varsel(ref_model,
+# Basing this off of discussion on stan forum:
+# https://discourse.mc-stan.org/t/projpred-fixing-group-effects-in-search-terms-and-tips-for-speed/31678/4
+search_terms <- get_search_terms(group_effects,auxilliary_variables, max_terms=16) 
+
+
+# Basing from this: https://discourse.mc-stan.org/t/advice-on-using-search-terms-in-projpred/22846/3
+
+
+varsel_model <- cv_varsel(ref_model,
                           method = 'forward', 
                           cv_method = 'kfold', 
-                          K = 2,
+                          K = 5,
                           verbose = TRUE, 
                           seed = 1,
-                          search_terms=search_terms)
+                          search_terms=search_terms,
+                          nterms_max=12)
 
-save(cv_varsel_res,file="./outputs/cv_varsel_res.rda")
+save(cv_varsel_res,file="./outputs/cv_varsel_res_test_2.rda")
 

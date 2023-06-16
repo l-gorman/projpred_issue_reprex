@@ -71,13 +71,11 @@ group_effects <-"(1 | iso_country_code) + (1 | iso_country_code:village)"
 
 # Basing this off of discussion on stan forum:
 # https://discourse.mc-stan.org/t/projpred-fixing-group-effects-in-search-terms-and-tips-for-speed/31678/4
-search_terms <- get_search_terms(group_effects,auxilliary_variables, max_terms=16) 
-
-
+search_terms <- get_search_terms(group_effects,auxilliary_variables, max_terms=12) 
 # Basing from this: https://discourse.mc-stan.org/t/advice-on-using-search-terms-in-projpred/22846/3
 
 
-varsel_model <- cv_varsel(ref_model,
+cv_varsel_res <- cv_varsel(ref_model,
                           method = 'forward', 
                           cv_method = 'kfold', 
                           K = 5,
@@ -85,6 +83,19 @@ varsel_model <- cv_varsel(ref_model,
                           seed = 1,
                           search_terms=search_terms,
                           nterms_max=12)
+save(cv_varsel_res,file="./outputs/cv_varsel_res_test_1.rda")
+
+
+search_terms <- get_search_terms(group_effects,auxilliary_variables, max_terms=16) 
+
+cv_varsel_res <- cv_varsel(ref_model,
+                           method = 'forward', 
+                           cv_method = 'kfold', 
+                           K = 5,
+                           verbose = TRUE, 
+                           seed = 1,
+                           search_terms=search_terms,
+                           nterms_max=12)
 
 save(cv_varsel_res,file="./outputs/cv_varsel_res_test_2.rda")
 

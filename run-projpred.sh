@@ -1,14 +1,13 @@
 #!/bin/bash
  
 #SBATCH --job-name=projpred_reprex
-#SBATCH -o ./Report/projpred.%a.out
+#SBATCH -o ./Report/projpred.out
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=4
-#SBATCH --time=0-00:30:00
+#SBATCH --time=0-01:00:00
 #SBATCH --mem=16G
 #SBATCH --account=sscm012844
-#SBATCH --array=1-2
 
 
 cd "${SLURM_SUBMIT_DIR}"
@@ -26,6 +25,8 @@ echo "More details on submitting jobs here https://www.acrc.bris.ac.uk/protected
 
 module add languages/r/4.1.0
 
-Rscript "./run_projpred.R" -j ${SLURM_ARRAY_TASK_ID}
+Rscript "./run_projpred.R" 
+
+#Rscript "./run_projpred.R" -j ${SLURM_ARRAY_TASK_ID}
 
 

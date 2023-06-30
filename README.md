@@ -14,9 +14,6 @@ takes a while to run!).
 
 To create larger/small reference models, change the value for `N` found in the `create_model.R`.
 
-
-
-
 # Notes
 
 Error:
@@ -26,3 +23,5 @@ Failed with error:  ‘there is no package called ‘optimx’’
 Error in getOptfun(optimizer) : 
   'optimx' package must be installed order to use 'optimizer="optimx"'
 ```
+
+I see in the projpred package that it "suggests" `optimx`. May be better to move it as a compulsory dependency, as this example fails without it.

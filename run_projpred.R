@@ -1,10 +1,9 @@
 # sbatch run-projpred.sh
 library(readr)
-
 library(brms)
 library(projpred)
 library(cmdstanr)
-# library(optimx)
+library(optimx)
 # library(optparse)
 
 options(mc.cores = 4,  brms.backend = "cmdstanr")
@@ -54,61 +53,48 @@ auxilliary_variables <- c(
   'education_cleaned',
   
   #Assets
-  'log_livestock_tlu'
-  # 'log_land_cultivated',
-  # 
-  # # Practices
-  # 'off_farm_any',
-  # 'till_not_by_hand',
-  # 'external_labour',
-  # 'pesticide',
-  # 'debts_have',
-  # 'aidreceived',
-  # 'livestock_inputs_any',
-  # 'land_irrigated_any',
-  # 
-  # #------------------
-  # # Village Level
-  # 'norm_growing_period',
-  # 'log_min_travel_time',
-  # 'log_pop_dens',
-  # #------------------
-  # #County Level
-  # 'norm_gdl_country_shdi'
+  'log_livestock_tlu',
+  'log_land_cultivated',
+
+  # Practices
+  'off_farm_any',
+  'till_not_by_hand',
+  'external_labour',
+  'pesticide',
+  'debts_have',
+  'aidreceived',
+  'livestock_inputs_any',
+  'land_irrigated_any',
+
+  #------------------
+  # Village Level
+  'norm_growing_period',
+  'log_min_travel_time',
+  'log_pop_dens',
+  #------------------
+  #County Level
+  'norm_gdl_country_shdi'
 )
 
 group_effects <-"(1 | iso_country_code) + (1 | iso_country_code:village)"
 
+nterms_max <- 10
 
 # Basing this off of discussion on stan forum:
 # https://discourse.mc-stan.org/t/projpred-fixing-group-effects-in-search-terms-and-tips-for-speed/31678/4
-search_terms <- get_search_terms(group_effects,auxilliary_variables, max_terms=3) 
+search_terms <- get_search_terms(group_effects,auxilliary_variables, max_terms=nterms_max) 
+
 # Basing from this: https://discourse.mc-stan.org/t/advice-on-using-search-terms-in-projpred/22846/3
-
-
 cv_varsel_res <- cv_varsel(ref_model,
                           method = 'forward', 
                           cv_method = 'kfold', 
-                          K = 2,
+                          K = 5,
                           verbose = TRUE, 
                           seed = 1,
+                          # search_terms = NULL,
+                          refit_proj=T,
                           search_terms=search_terms,
-                          nterms_max=3)
+                          nterms_max=nterms_max
+                          )
 save(cv_varsel_res,file="./outputs/cv_varsel_res_test_1.rda")
 
-
-
-# if (opt$index==2){
-# search_terms <- get_search_terms(group_effects,auxilliary_variables, max_terms=16) 
-# 
-# cv_varsel_res <- cv_varsel(ref_model,
-#                            method = 'forward', 
-#                            cv_method = 'kfold', 
-#                            K = 2,
-#                            verbose = TRUE, 
-#                            seed = 1,
-#                            search_terms=search_terms,
-#                            nterms_max=12)
-# 
-# save(cv_varsel_res,file="./outputs/cv_varsel_res_test_2.rda")
-# }

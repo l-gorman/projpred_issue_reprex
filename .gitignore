@@ -5,3 +5,6 @@ data/modelling_df.csv
 *.Rproj
 Report/
 .Rproj.user
+
+outputs/cv_varsel_res_test_1.rda
+.Rhistory

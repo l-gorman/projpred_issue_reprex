@@ -1,8 +1,12 @@
 library(readr)
-
 library(brms)
 library(projpred)
 library(cmdstanr)
+
+# Choose the number of observations to
+# sample here.
+
+N <- 3000
 
 options(mc.cores = 4, brms.backend = "cmdstanr") # allows threading
 
@@ -11,7 +15,7 @@ indicator_data <- readr::read_csv("./data/example_dataset.csv")
 
 set.seed(123)
 
-indicator_data <- indicator_data[sample(c(1:nrow(indicator_data)),400),]
+indicator_data <- indicator_data[sample(c(1:nrow(indicator_data)),N),]
 
 ref_model <- brm(
   formula=bf(log_tva ~ 1 +
